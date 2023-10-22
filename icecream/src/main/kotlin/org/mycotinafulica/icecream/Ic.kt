@@ -48,7 +48,7 @@ class Ic {
             sb.append(")")
             result.append(logger.log("$sb"))
 
-            return result.toString()
+            return normalizeResult(result.toString())
         }
 
         fun log(): String {
@@ -59,7 +59,7 @@ class Ic {
             sb = printCommon(sb, details)
             result.append(logger.log("$sb"))
 
-            return result.toString()
+            return normalizeResult(result.toString())
         }
 
         fun <T: Any> log(obj: T): String {
@@ -95,7 +95,7 @@ class Ic {
                 }
             }
 
-            return result.toString()
+            return normalizeResult(result.toString())
         }
 
         private fun <T: Any> prettyPrintObject(obj: T, indent: Int, result: StringBuilder) {
@@ -138,6 +138,15 @@ class Ic {
                         prettyPrintObject(it.second!!, indent + 1, result)
                     }
                 }
+            }
+        }
+
+        private fun normalizeResult(result: String): String{
+            if(result[result.length - 1] == '\n'){
+                return result.substring(0, result.length - 1)
+            }
+            else{
+                return result
             }
         }
 

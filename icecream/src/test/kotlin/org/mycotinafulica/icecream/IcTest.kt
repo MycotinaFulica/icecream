@@ -1,52 +1,50 @@
 package org.mycotinafulica.icecream
 
 import org.junit.jupiter.api.Test
+import org.mycotinafulica.icecream.helper.SomeEnum
 import kotlin.test.assertEquals
 
-
 class IcTest {
-
-
     @Test
     fun testSimpleTypes(){
         var result = Ic.log(5)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:12 > Int: 5", result)
+                "> testSimpleTypes:10 > Int: 5", result)
         result = Ic.log(5L)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:15 > Long: 5", result)
+                "> testSimpleTypes:13 > Long: 5", result)
         result = Ic.log(5f)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:18 > Float: 5.0", result)
+                "> testSimpleTypes:16 > Float: 5.0", result)
         result = Ic.log(5.0)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:21 > Double: 5.0", result)
+                "> testSimpleTypes:19 > Double: 5.0", result)
         result = Ic.log('a')
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:24 > Char: a", result)
+                "> testSimpleTypes:22 > Char: a", result)
         result = Ic.log(false)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:27 > Boolean: false", result)
+                "> testSimpleTypes:25 > Boolean: false", result)
 
         val byte: Byte = 105
         result = Ic.log(byte)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:32 > Byte: 105", result)
+                "> testSimpleTypes:30 > Byte: 105", result)
         val short: Short = 10
         result = Ic.log(short)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:36 > Short: 10", result)
+                "> testSimpleTypes:34 > Short: 10", result)
 
         val array = arrayOf("str1", "str2", "str3")
         val list = listOf(1, 2, 3, 4 ,5)
 
         result = Ic.log(array)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:43 > Array: [str1, str2, str3]", result)
+                "> testSimpleTypes:41 > Array: [str1, str2, str3]", result)
 
         result = Ic.log(list)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> testSimpleTypes:47 > List: [1, 2, 3, 4, 5]", result)
+                "> testSimpleTypes:45 > List: [1, 2, 3, 4, 5]", result)
     }
 
     @Test
@@ -58,12 +56,24 @@ class IcTest {
     private fun inspectFun(x: String, y: Int, z: List<String>){
         val result = Ic.inspect(x, y ,z)
         assertEquals("MYC > org.mycotinafulica.icecream.IcTest " +
-                "> inspectFun:59(arg1, 2, [arr1, arr2])", result)
+                "> inspectFun:57(arg1, 2, [arr1, arr2])", result)
     }
 
     private fun inspectEmptyFun(){
         val result = Ic.inspect()
-        assertEquals("MYC > org.mycotinafulica.icecream.IcTest > inspectEmptyFun:65()", result)
+        assertEquals("MYC > org.mycotinafulica.icecream.IcTest > inspectEmptyFun:63()", result)
+    }
+
+    @Test
+    fun enumTest(){
+        val result = Ic.log(SomeEnum.APRIL)
+        assertEquals("MYC > org.mycotinafulica.icecream.IcTest > enumTest:69 > Enum: APRIL", result)
+    }
+
+    @Test
+    fun emptyLoggingTest(){
+        val result = Ic.log()
+        assertEquals("MYC > org.mycotinafulica.icecream.IcTest > emptyLoggingTest:75", result)
     }
 
     init {
