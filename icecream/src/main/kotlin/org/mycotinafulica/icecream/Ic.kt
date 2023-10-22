@@ -6,7 +6,7 @@ import org.mycotinafulica.icecream.logger.IcLogger
 import kotlin.reflect.KProperty1
 import kotlin.reflect.jvm.javaField
 
-class Ic {
+open class Ic {
     companion object {
         var prefix = ""
         var appPackageName = ""
@@ -16,6 +16,7 @@ class Ic {
         private var includeClassName = true
         private var includeMethodName = true
         private var includeLineNumber = true
+        private var stackNum = 3
 
         fun enableFileNamePrint() { includeFileName = true }
         fun enableClassNamePrint(){ includeClassName = true }
@@ -98,7 +99,7 @@ class Ic {
             return normalizeResult(result.toString())
         }
 
-        private fun <T: Any> prettyPrintObject(obj: T, indent: Int, result: StringBuilder) {
+        protected fun <T: Any> prettyPrintObject(obj: T, indent: Int, result: StringBuilder) {
 
             val properties = obj::class.members
                 .filterIsInstance<KProperty1<T, *>>()
@@ -141,7 +142,12 @@ class Ic {
             }
         }
 
-        private fun normalizeResult(result: String): String{
+        @JvmStatic
+        protected fun setStackNum(value: Int){
+            stackNum = value
+        }
+
+        protected fun normalizeResult(result: String): String{
             if(result[result.length - 1] == '\n'){
                 return result.substring(0, result.length - 1)
             }
@@ -150,7 +156,7 @@ class Ic {
             }
         }
 
-        private fun getSupportingExtension(obj: Any): SimpleObjectExtension?{
+        protected fun getSupportingExtension(obj: Any): SimpleObjectExtension?{
             extensions.forEach {
                 if(it.isSupported(obj)) return it
             }
@@ -158,7 +164,7 @@ class Ic {
             return null
         }
 
-        private fun getSimpleType(obj: Any?): String{
+        protected fun getSimpleType(obj: Any?): String{
             if(obj == null) return "null"
 
             return when(obj){
@@ -178,14 +184,14 @@ class Ic {
             }
         }
 
-        private fun isSimpleDataType(obj : Any?): Boolean {
+        protected fun isSimpleDataType(obj : Any?): Boolean {
             return (obj is String || obj is Number
                     || obj is Boolean || obj is Char
                     || obj is List<*> || obj is Array<*> || obj is Enum<*>
                     || obj == null)
         }
 
-        private fun printCommon(sb: StringBuilder, details: CallerDetails): StringBuilder {
+        protected fun printCommon(sb: StringBuilder, details: CallerDetails): StringBuilder {
             sb.append("$prefix > ")
             if(includeFileName){
                 sb.append(details.fileName)
@@ -204,8 +210,8 @@ class Ic {
             return sb
         }
 
-        private fun retrieveCallerInformation(): CallerDetails {
-            val caller = Thread.currentThread().stackTrace[3]
+        protected fun retrieveCallerInformation(): CallerDetails {
+            val caller = Thread.currentThread().stackTrace[stackNum]
 
             return CallerDetails(caller.fileName, caller.className, caller.methodName, caller.lineNumber.toString())
         }

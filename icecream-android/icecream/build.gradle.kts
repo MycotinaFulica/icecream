@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
+    implementation("org.mycotinafulica.icecream:icecream-core:1.0.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
