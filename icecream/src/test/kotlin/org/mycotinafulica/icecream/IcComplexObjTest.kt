@@ -1,7 +1,7 @@
 package org.mycotinafulica.icecream
 
 import org.junit.jupiter.api.Test
-import org.mycotinafulica.icecream.extension.JavaLoggingExtension
+import org.mycotinafulica.icecream.extension.IcDefaultExtension
 import org.mycotinafulica.icecream.helper.ComplexClass
 import org.mycotinafulica.icecream.helper.SomeDataClass
 import kotlin.test.assertEquals
@@ -10,7 +10,7 @@ class IcComplexObjTest {
     init {
         Ic.appPackageName = "org.mycotinafulica.icecream"
         Ic.prefix = "MYC"
-        Ic.extensions.add(JavaLoggingExtension())
+        Ic.extensions.add(IcDefaultExtension())
     }
 
     @Test
