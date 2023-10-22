@@ -4,19 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>icecream-core</artifactId>
+    <artifactId>icecream-kotlin-clinet</artifactId>
     <groupId>org.mycotinafulica.icecream</groupId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>icecream-core</name>
+    <name>consoleApp</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <repositories>
@@ -33,7 +31,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>1.8.22</version>
+                <version>1.8.10</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -64,20 +62,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.mycotinafulica.icecream</groupId>
+            <artifactId>icecream-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit5</artifactId>
-            <version>1.8.22</version>
+            <version>1.8.10</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>1.8.22</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-reflect</artifactId>
-            <version>1.8.22</version>
+            <version>1.8.10</version>
         </dependency>
     </dependencies>
 
