@@ -1,6 +1,6 @@
 package org.mycotinafulica.icecream.logger
 
-class ConsoleLogger: IcLogger {
+class IcConsoleLogger: IcLogger {
     override fun log(value: String): String {
         println(value)
         return "$value\n"

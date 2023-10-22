@@ -1,6 +1,5 @@
 package org.mycotinafulica.icecream
-
-import org.mycotinafulica.icecream.extension.SimpleObjectExtension
+import org.mycotinafulica.icecream.extension.IcObjectExtension
 import org.mycotinafulica.icecream.logger.AndroidLogger
 import org.mycotinafulica.icecream.logger.Mode
 
@@ -18,7 +17,7 @@ class AIc: Ic() {
             prefix = tag
             (logger as AndroidLogger).tag = tag
         }
-        fun addExtension(extension: SimpleObjectExtension) {
+        fun addExtension(extension: IcObjectExtension) {
             extensions.add(extension)
         }
 

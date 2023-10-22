@@ -1,7 +1,7 @@
 package org.mycotinafulica.icecream
 
-import org.mycotinafulica.icecream.extension.SimpleObjectExtension
-import org.mycotinafulica.icecream.logger.ConsoleLogger
+import org.mycotinafulica.icecream.extension.IcObjectExtension
+import org.mycotinafulica.icecream.logger.IcConsoleLogger
 import org.mycotinafulica.icecream.logger.IcLogger
 import kotlin.reflect.KProperty1
 import kotlin.reflect.jvm.javaField
@@ -10,8 +10,8 @@ open class Ic {
     companion object {
         var prefix = ""
         var appPackageName = ""
-        var logger: IcLogger = ConsoleLogger()
-        val extensions = ArrayList<SimpleObjectExtension>()
+        var logger: IcLogger = IcConsoleLogger()
+        val extensions = ArrayList<IcObjectExtension>()
         private var includeFileName = false
         private var includeClassName = true
         private var includeMethodName = true
@@ -156,7 +156,7 @@ open class Ic {
             }
         }
 
-        protected fun getSupportingExtension(obj: Any): SimpleObjectExtension?{
+        protected fun getSupportingExtension(obj: Any): IcObjectExtension?{
             extensions.forEach {
                 if(it.isSupported(obj)) return it
             }
