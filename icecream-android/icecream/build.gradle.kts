@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -29,6 +30,46 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/mycotinafulica/icecream")
+            credentials {
+                username = ""
+                password = ""
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            artifact("$buildDir/outputs/aar/icecream-release.aar")
+            groupId = "org.mycotinafulica.icecream"
+            artifactId = "icecream-android"
+            version = "1.0.0"
+            pom.withXml{
+                val dependenciesNode = asNode().appendNode("dependencies")
+                configurations.getByName("implementation") {
+                    dependencies.forEach {
+                        val dependencyNode = dependenciesNode.appendNode("dependency")
+                        dependencyNode.appendNode("groupId", it.group)
+                        dependencyNode.appendNode("artifactId", it.name)
+                        dependencyNode.appendNode("version", it.version)
+                    }
+                }
+                configurations.getByName("api") {
+                    dependencies.forEach {
+                        val dependencyNode = dependenciesNode.appendNode("dependency")
+                        dependencyNode.appendNode("groupId", it.group)
+                        dependencyNode.appendNode("artifactId", it.name)
+                        dependencyNode.appendNode("version", it.version)
+                    }
+                }
+            }
+        }
     }
 }
 

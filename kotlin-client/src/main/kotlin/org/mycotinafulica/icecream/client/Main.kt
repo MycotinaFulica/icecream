@@ -25,6 +25,12 @@ class Main {
             val dataClass = SomeDataClass(listOf("lst1", "lst2", "lst3"), arrayOf(1, 2, 3))
             val myComplexObj = ComplexClass("myprop1", 5, dataClass)
             Ic.log(myComplexObj)
+
+            myFun("myString", 20, listOf("str1", "str2", "str3"))
+        }
+
+        fun myFun(arg1: String, arg2: Int, arg3: List<String>){
+            Ic.inspect(arg1, arg2, arg3)
         }
     }
 }
